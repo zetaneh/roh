@@ -332,66 +332,67 @@ def count_horof(text):
     print(f'Number of sawa9it: {len(d_sawa9it)}')
     return count,d_sawa9it
 
+def main():
+    st.markdown('<style>body{background-color: #F0F8FF;}</style>',unsafe_allow_html=True)
+    st.markdown('<p style="text-align: center; font-size: 30px; font-weight: bold;">المساعد الحرفي</p>', unsafe_allow_html=True)
+    #st.subheader('برمجة : أيوب أبرايش')
+    # subheader html center
+    st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;">برمجة : أيوب أبرايش</p>', unsafe_allow_html=True)
+    text_0= """
+    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
 
-#st.title('المساعد الحرفي')
-st.markdown('<style>body{background-color: #F0F8FF;}</style>',unsafe_allow_html=True)
-#st.title('المساعد الحرفي')
-# title html center
-st.markdown('<p style="text-align: center; font-size: 30px; font-weight: bold;">المساعد الحرفي</p>', unsafe_allow_html=True)
-#st.subheader('برمجة : أيوب أبرايش')
-# subheader html center
-st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;">برمجة : أيوب أبرايش</p>', unsafe_allow_html=True)
-text_0= """
-بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+    الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
 
-الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+    الرَّحْمَنِ الرَّحِيمِ
 
-الرَّحْمَنِ الرَّحِيمِ
+    مَالِكِ يَوْمِ الدِّينِ
 
-مَالِكِ يَوْمِ الدِّينِ
+    إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
 
-إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+    اهدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
 
-اهدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+    صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلاَ الضَّالِّينَ
+    """
+    # center text
+    text = st.text_area('ادخل النص هنا', value=text_0, height=200)
+    st.info('يمكنك ادخال اسمك واسم امك او سورة او اي نص باللغة العربية  ')
+    #add url = http://holyquran.net/quran/index.html 
+    st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;"><a href="http://holyquran.net/quran/index.html">نسخ سور القران</a></p>', unsafe_allow_html=True)
+    if st.button('اضغط هنا للحساب'):
+        count,d_sawa9it = count_horof(text)
+        # columns=['الحرف','عدد التكرار']
+        st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">الحروف الواردة وتكرارها في النص</p>', unsafe_allow_html=True)
+        df_count = pd.DataFrame.from_dict(count, orient='index',columns=['عدد التكرار']).T
+        st.dataframe(df_count)
+        sum_sarir = 0
+        for k,v in count.items():
+            sum_sarir += v* hisab_sarir(k)
+        sum_kabir = 0
+        for k,v in count.items():
+            sum_kabir += v* hisab_kabir(k)
+        
+        # format streamlit : text to right, arabic font, bold
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجموع العدد بالجمل الصغير:  {sum_sarir}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجموع العدد بالجمل الكبير:  {sum_kabir}</p>', unsafe_allow_html=True)
+        #html line
+        st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">الحروف السواقط وتكرارها في النص</p>', unsafe_allow_html=True) 
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">الحروف السواقط </p>', unsafe_allow_html=True)
+        # no index
+        st.write(pd.DataFrame(list(d_sawa9it.keys()),columns=['الحروف السواقط']).T)
+        #st.write(f'عدد السواقط: {len(d_sawa9it)}')
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">عدد السواقط:  {len(d_sawa9it)}</p>', unsafe_allow_html=True)
+        #st.write(f'مجوع السواقط بالجمل الصغير: {sum(d_sawa9it.values())}')
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجوع السواقط بالجمل الصغير:  {sum(d_sawa9it.values())}</p>', unsafe_allow_html=True)
+        #st.write(f'مجوع السواقط بالجمل الكبير: {sum([hisab_kabir(k) for k in d_sawa9it.keys()])}')
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجوع السواقط بالجمل الكبير:  {sum([hisab_kabir(k) for k in d_sawa9it.keys()])}</p>', unsafe_allow_html=True)
 
-صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلاَ الضَّالِّينَ
-"""
-# center text
-text = st.text_area('ادخل النص هنا', value=text_0, height=200)
-st.info('يمكنك ادخال اسمك واسم امك او سورة او اي نص باللغة العربية  ')
-#add url = http://holyquran.net/quran/index.html 
-st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;"><a href="http://holyquran.net/quran/index.html">نسخ سور القران</a></p>', unsafe_allow_html=True)
-if st.button('اضغط هنا للحساب'):
-    count,d_sawa9it = count_horof(text)
-    # columns=['الحرف','عدد التكرار']
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">الحروف الواردة وتكرارها في النص</p>', unsafe_allow_html=True)
-    df_count = pd.DataFrame.from_dict(count, orient='index',columns=['عدد التكرار']).T
-    st.dataframe(df_count)
-    sum_sarir = 0
-    for k,v in count.items():
-        sum_sarir += v* hisab_sarir(k)
-    sum_kabir = 0
-    for k,v in count.items():
-        sum_kabir += v* hisab_kabir(k)
-    
-    # format streamlit : text to right, arabic font, bold
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجموع العدد بالجمل الصغير:  {sum_sarir}</p>', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجموع العدد بالجمل الكبير:  {sum_kabir}</p>', unsafe_allow_html=True)
-    #html line
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">الحروف السواقط وتكرارها في النص</p>', unsafe_allow_html=True) 
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">الحروف السواقط </p>', unsafe_allow_html=True)
-    # no index
-    st.write(pd.DataFrame(list(d_sawa9it.keys()),columns=['الحروف السواقط']).T)
-    #st.write(f'عدد السواقط: {len(d_sawa9it)}')
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">عدد السواقط:  {len(d_sawa9it)}</p>', unsafe_allow_html=True)
-    #st.write(f'مجوع السواقط بالجمل الصغير: {sum(d_sawa9it.values())}')
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجوع السواقط بالجمل الصغير:  {sum(d_sawa9it.values())}</p>', unsafe_allow_html=True)
-    #st.write(f'مجوع السواقط بالجمل الكبير: {sum([hisab_kabir(k) for k in d_sawa9it.keys()])}')
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">مجوع السواقط بالجمل الكبير:  {sum([hisab_kabir(k) for k in d_sawa9it.keys()])}</p>', unsafe_allow_html=True)
+        st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">اسماء الله الحسنى الموافقة</p>', unsafe_allow_html=True)             
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;"> بالجمل الكبير :{search_asma_combinaison(sum_kabir,kabir=True)}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;"> بالجمل الصغير :{search_asma_combinaison(sum_sarir,kabir=False)}</p>', unsafe_allow_html=True)
+        
 
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">اسماء الله الحسنى الموافقة</p>', unsafe_allow_html=True)             
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;"> بالجمل الكبير :{search_asma_combinaison(sum_kabir,kabir=True)}</p>', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;"> بالجمل الصغير :{search_asma_combinaison(sum_sarir,kabir=False)}</p>', unsafe_allow_html=True)
+if __name__ == '__main__':
+    main()
