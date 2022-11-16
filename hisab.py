@@ -6,7 +6,22 @@ import pandas as pd
 import arabic_reshaper
 import bidi.algorithm as bidialg
 
-
+# dont show run bar
+st.set_option('deprecation.showRunButton', False)
+# background image
+back_img_path = "./back.jpg"
+st.markdown(
+    f"""
+    <style>
+    .reportview-container {{
+        background: url("https://raw.githubusercontent.com/roh-gh/roh-gh.github.io/master/back.jpg")
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+    
+    
 d_abajad = {'ا': 1,
             'ب': 2,
             'ج': 3,
