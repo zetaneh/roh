@@ -6,21 +6,14 @@ import pandas as pd
 import arabic_reshaper
 import bidi.algorithm as bidialg
 
-# dont show run bar
-st.set_option('deprecation.showRunButton', False)
-# background image
-back_img_path = "./back.jpg"
-st.markdown(
-    f"""
-    <style>
-    .reportview-container {{
-        background: url("https://raw.githubusercontent.com/roh-gh/roh-gh.github.io/master/back.jpg")
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-    
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
     
 d_abajad = {'ا': 1,
             'ب': 2,
@@ -395,7 +388,8 @@ def main():
         st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">الحروف السواقط وتكرارها في النص</p>', unsafe_allow_html=True) 
         st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">الحروف السواقط </p>', unsafe_allow_html=True)
         # no index
-        st.write(pd.DataFrame(list(d_sawa9it.keys()),columns=['الحروف السواقط']).T)
+        #st.write(pd.DataFrame(list(d_sawa9it.keys()),columns=['الحروف السواقط']).T)
+        st.write(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red; font-weight: bold;">{list(d_sawa9it.keys())}</p>', unsafe_allow_html=True)
         #st.write(f'عدد السواقط: {len(d_sawa9it)}')
         st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;">عدد السواقط:  {len(d_sawa9it)}</p>', unsafe_allow_html=True)
         #st.write(f'مجوع السواقط بالجمل الصغير: {sum(d_sawa9it.values())}')
