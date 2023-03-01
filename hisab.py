@@ -51,7 +51,11 @@ d_abajad = {'ا': 1,
             'آ':1,
             'أ':1,
             'إ':1,
-            ' ':0}
+            ' ':0,
+            'ـ':0,
+            'ّ':0,
+            'َ':0,
+            'ً':0,}
 
 d_istinta9 = {'ا': 'الف',
                 'ب': 'باء',
@@ -195,6 +199,13 @@ d_asma = {'الله': 1,
 
 l_asma = [ k for k in d_asma.keys() ]
 
+# delete extra'ـ' from phrase
+def delete_extra(text):
+    for i in range(len(text)):
+        if text[i] == 'ـ':
+            if text[i-1] == 'ـ':
+                text = text[:i-1] + text[i:]
+    return text
 
 
 MOD = True
@@ -347,25 +358,208 @@ def main():
     # subheader html center
     st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;">برمجة : أيوب أبرايش</p>', unsafe_allow_html=True)
     text_0= """
-    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
 
-    الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
-
-    الرَّحْمَنِ الرَّحِيمِ
-
-    مَالِكِ يَوْمِ الدِّينِ
-
-    إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
-
-    اهدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
-
-    صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلاَ الضَّالِّينَ
     """
     # center text
+    # clear button
+    if st.button('مسح'):
+        text_0 = ''
     text = st.text_area('ادخل النص هنا', value=text_0, height=200)
-    st.info('يمكنك ادخال اسمك واسم امك او سورة او اي نص باللغة العربية  ')
+    #suggestions
+    import pandas as pd
+    import os
+    if os.path.exists('suggestions.csv'):
+        df = pd.read_csv('suggestions.csv')
+        sug = df['suggestions'].tolist()
+        sug = [s for s in sug if s != '']
+        
+    else:
+        sug = ['منع القرين والعين والسحر و كل اذى روحاني وشيطاني وسحر وتوابع عن ايوب بن جميله']
+    
+    
+    if text != '' and text not in sug:
+        sug.append(text)
+            
+    df = pd.DataFrame(sug,columns=['suggestions'])
+        
+    
+    df.to_csv('suggestions.csv',index=False)
+        
+    if st.checkbox('اقتراحات'):
+        text = st.selectbox('اختر اقتراح',sug)
+
+        
+
     #add url = http://holyquran.net/quran/index.html 
-    st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;"><a href="http://holyquran.net/quran/index.html">نسخ سور القران</a></p>', unsafe_allow_html=True)
+    #st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;"><a href="http://holyquran.net/quran/index.html">نسخ سور القران</a></p>', unsafe_allow_html=True)
+    
+    # طلسم المنع
+    #if st.checkbox(' طلسم المنع'):
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    #new line in html : <br>
+    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh;">abjad to abath: <br> {abjad_to_abath(text)}', unsafe_allow_html=True)
+    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh;">abath to abjad: <br> {abath_to_abjad(text)}', unsafe_allow_html=True) 
+
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    
+    st.write('Permutation Abajad')
+    N = st.number_input('N',min_value=2,value=2)
+    text_ = text
+    l = []
+    for i in range(1,N+1):
+        text_permutation = abjad_to_abath(text_)[1]
+        l.append(text_permutation)
+        text_ = text_permutation
+        
+    st.write(l)
+    
+    
+
+
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+
+    count,d_sawa9it = count_horof(text)
+    sum_sarir = 0
+    for k,v in count.items():
+        sum_sarir += v* hisab_sarir(k)
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    st.write(f'حساب جمل : {sum_sarir}')
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    talsam = sum_sarir * 195555521 
+    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">طلسم المنع = {talsam}</p>', unsafe_allow_html=True)
+    # to arabic number
+    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">طلسم المنع = {convert_number(talsam)}</p>', unsafe_allow_html=True)
+
+
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    talsam = sum_sarir * 469925052834290924265413  
+    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">طلسم الطلاسم = {talsam}</p>', unsafe_allow_html=True)
+    # to arabic number
+    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">طلسم الطلاسم = {convert_number(talsam)}</p>', unsafe_allow_html=True)
+    st.info("""ثم ترسم عددك الجديد وتكتب حوله حروفا مفرقة
+                    كـ هـ ي ع ص ح م ع س ق أ ن ب أ ت ش ع ر ر أ س ف ل أ ن ب ن ف ل أ ن هـ
+                    وتدور بها دائريا حول عددك حتى تغلق به دائريا أو أكثر من دائرة المهم تتم العبارة لو مرتين
+                    أو أكثر بحسب ما تغلق عليه دائريا""")
+    
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    
+    
+    def get_num(t):
+        l = []
+        for c in t:
+                n = hisab_sarir(c)
+                if n<10:
+                    n=n
+                if 10<=n<100:
+                    n=n//10
+                if n>=100:
+                    n=n//100
+                print(f'{c} : {n}')
+                if n!= 0:
+                    l.append(n)
+        print(l)
+        return ''.join([str(i) for i in l][::-1])
+    t =  st.text_input('النص')
+    
+    if st.button('مثلث الغزالي'):
+        jomal = hisab_sarir(t)
+        st.write(f'جمل : {jomal}')
+        x,r = divmod(jomal,15)
+        st.write('طلسم عددي')
+        #st.write(get_num(t))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
+        st.write(abjad_to_abath(t)[1])
+        
+        matrix = np.array([[4*x,9*x+r,2*x],
+                           [3*x,5*x,7*x+r],
+                           [8*x+r,x,6*x]])
+        
+        # apply the function convert_number to each element of the matrix
+        matrix = np.vectorize(convert_number)(matrix)
+        st.write(matrix)
+
+
+    if st.button('مربع'):
+        jomal = hisab_sarir(t)
+        st.write(f'جمل : {jomal}')
+        x,r = divmod(jomal,34)
+        st.write('طلسم عددي')
+        #st.write(get_num(t))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
+        st.write(abjad_to_abath(t)[1])
+
+        matrix = np.array([[8*x,11*x,14*x+r,x],
+                           [13*x+r,2*x,7*x,12*x],
+                           [3*x,16*x+r,9*x,6*x],
+                            [10*x,5*x,4*x,15*x+r]])
+        # apply the function convert_number to each element of the matrix
+        matrix = np.vectorize(convert_number)(matrix)
+        st.write(matrix)
+    # integer
+    number = st.number_input('العدد',min_value=1)
+    if st.button('find'):
+        # find all the words where sum with  hisab_sarir = number
+        words = ['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي']
+        value = [hisab_sarir(i) for i in words]
+        d = dict(zip(words,value))
+        # order the dict by value
+        d = {k: v for k, v in sorted(d.items(), key=lambda item: item[1])}
+        # find quadruplets with repetition
+        l = []  
+        for k,v in d.items():
+            for k1,v1 in d.items():
+                for k2,v2 in d.items():
+                    if number-v-v1-v2 in d.values():
+                        l.append(k)
+        
+        reptition = [] 
+        res = []
+        for i in l:
+            for k,v in d.items():
+                for k1,v1 in d.items():
+                    for k2,v2 in d.items():
+                        # dont add duplicate
+                        if number-v-v1-v2 == d[i] and set([i,k,k1,k2]) not in reptition:
+                            if hisab_sarir(i+k+k1+k2) == number:
+                                reptition.append(set([i,k,k1,k2]))
+                                res.append(i+k+k1+k2)
+        st.write(res)
+                            
+                             
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    if st.button('حساب القرين'):
+        jomal = hisab_sarir(t)
+        jour = (jomal+3)%7
+        d= {'Dimanche':1,
+                'Lundi':2,
+                    'Mardi':3,
+                        'Mercredi':4,
+                            'Jeudi':5,
+                                'Vendredi':6,
+                                    'Samedi':0}
+        for k,v in d.items():
+            if jour == v:
+                st.write(f'اليوم : {jour} = {k}')
+                
+        sa3a = (jomal)%24
+        st.write(f'الساعة من الشروق: {sa3a}')
+        st.markdown(""" تكون الكتابة والتبخير والحمل في الساعة واليوم .. وتعيد التبخير كل يوم في نفس الساعة بان تخرح الوفق مطوي وتبخير وتتامله ساعة متصلا بقرينك    
+        """)
+        matrix = np.array([[35,63,76,8,36,49,62,9,22],
+                           [10,23,60,64,77,33,37,50,6],
+                           [48,7,38,21,61,11,75,34,65],
+                           [39,52,2,12,25,56,66,79,29],
+                            [80,27,67,53,0,40,26,54,13],
+                            [55,14,24,28,68,78,1,41,51],
+                            [19,59,15,73,32,69,46,5,42],
+                            [3,43,47,57,16,20,30,70,74],
+                            [71,72,31,44,45,4,17,18,58] 
+        ])
+        st.write(matrix*jomal)                       
+                    
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+        
+    
     if st.button('اضغط هنا للحساب'):
         count,d_sawa9it = count_horof(text)
         # columns=['الحرف','عدد التكرار']
@@ -401,7 +595,68 @@ def main():
         st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">اسماء الله الحسنى الموافقة</p>', unsafe_allow_html=True)             
         st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;"> بالجمل الكبير :{search_asma_combinaison(sum_kabir,kabir=True)}</p>', unsafe_allow_html=True)
         st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold;"> بالجمل الصغير :{search_asma_combinaison(sum_sarir,kabir=False)}</p>', unsafe_allow_html=True)
-        
+    
+    
 
-if __name__ == '__main__':
-    main()
+    
+
+def convert_number(text):
+    text = str(text)
+    arabic_numbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩']
+    return ''.join([arabic_numbers[int(i)] if i.isdigit() else i for i in text])
+
+
+def unify_alias(letter):
+    if letter == 'أ':
+        return 'ا'
+    elif letter == 'آ':
+        return 'ا'
+    elif letter == 'إ':
+        return 'ا'
+    elif letter == 'ؤ':
+        return 'و'
+    elif letter == 'ئ':
+        return 'ي'
+    elif letter == 'ة':
+        return 'ه'
+    elif letter == 'ى':
+        return 'ي'
+    elif letter == 'هـ':
+        return 'ه'
+    elif letter == 'كـ':
+        return 'ك'
+    else:
+        return letter
+    
+def abjad_to_abath(text):
+    text = str(text)
+    d = {'أ':'أ', 'ب':'ب', 'ت':'ج', 'ث':'د', 'ج':'هـ', 'ح':'و', 'خ':'ز', 'د':'ح', 'ذ':'ط', 'ر':'ي', 'ز':'كـ', 'س':'ل', 'ش':'م', 'ص':'ن', 'ض':'س', 'ط':'ع', 'ظ':'ف', 'ع':'ص', 'غ':'ق', 'ف':'ر', 'ق':'ش', 'كـ':'ت', 'ل':'ث', 'م':'خ', 'ن':'ذ', 'هـ':'ض', 'و':'ظ', 'ي':'غ'}
+    d = {unify_alias(k):v for k,v in d.items()}
+    
+    converted_text = []
+    for letter in text:
+        if letter in d:
+            converted_text.append(d[letter])
+        else:
+            converted_text.append(letter)
+    
+    converted_text = [i for i in converted_text if i != ' ']
+    return converted_text, "".join(converted_text)
+
+def abath_to_abjad(text):
+    text = str(text)
+    d = {'أ':'أ', 'ب':'ب', 'ج':'ت', 'د':'ث', 'هـ':'ج', 'و':'ح', 'ز':'خ', 'ح':'د', 'ط':'ذ', 'ي':'ر', 'كـ':'ز', 'ل':'س', 'م':'ش', 'ن':'ص', 'س':'ض', 'ع':'ط', 'ف':'ظ', 'ص':'ع', 'ق':'غ', 'ر':'ف', 'ش':'ق', 'ت':'كـ', 'ث':'ل', 'خ':'م', 'ذ':'ن', 'ض':'هـ', 'ظ':'و', 'غ':'ي'}
+    d = {unify_alias(k):v for k,v in d.items()}
+
+    converted_text = []
+    for letter in text:
+
+        if letter in d:
+            converted_text.append(d[letter])
+        else:
+            converted_text.append(letter)
+    # delete spaces from list
+    converted_text = [i for i in converted_text if i != ' ']
+    return converted_text, "".join(converted_text)
+#if __name__ == '__main__':
+main()
