@@ -527,6 +527,36 @@ def main():
                             
                              
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    
+    if st.button('طالع'):
+        jomal = hisab_sarir(t)
+        st.write(f'جمل : {jomal}')
+        day = jomal%7
+        heure = jomal%24
+        if day == 0:
+            st.write('اليوم : السبت')
+        if day == 1:
+            st.write('اليوم : الأحد')   
+        if day == 2:
+            st.write('اليوم : الاثنين')
+        if day == 3:
+            st.write('اليوم : الثلاثاء')
+        if day == 4:
+            st.write('اليوم : الأربعاء')
+        if day == 5:
+            st.write('اليوم : الخميس')
+        if day == 6:
+            st.write('اليوم : الجمعة')
+        st.write(f'الساعة بعد الشروق: {heure}')
+        tab3 = (jomal + 52)%4
+        if tab3 == 0:
+            st.write('طبع مائي')
+        if tab3 == 1:
+            st.write('طبع ناري')
+        if tab3 == 2:
+            st.write('طبع هوائي')
+        if tab3 == 3:
+            st.write('طبع ترابي')
     if st.button('حساب القرين'):
         jomal = hisab_sarir(t)
         jour = (jomal+3)%7
