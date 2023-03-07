@@ -478,7 +478,23 @@ def main():
         matrix = np.vectorize(convert_number)(matrix)
         st.write(matrix)
 
-
+    if st.button('مثلث خالي الوسط'):
+        jomal = hisab_sarir(t)
+        st.write(f'جمل : {jomal}')
+        x,r = divmod(jomal,12)
+        st.write('طلسم عددي')
+        #st.write(get_num(t))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
+        st.write(abjad_to_abath(t)[1])
+        a = 0 #كن
+        matrix = np.array([[3*x,8*x+r,1*x],
+                           [7*x+r,0,5*x],
+                           [2*x,4*x,6*x+r]])
+        
+        
+        # apply the function convert_number to each element of the matrix
+        matrix = np.vectorize(convert_number)(matrix)
+        st.write(matrix)
     if st.button('مربع'):
         jomal = hisab_sarir(t)
         st.write(f'جمل : {jomal}')
@@ -528,6 +544,36 @@ def main():
                              
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     
+    t_= st.text_area('النص',key='t_')
+    # delete \t \n space
+    t_ = t_.replace(' ','').replace('\t','').replace('\n','')
+
+    if st.button('is9at'):
+        t,l,s = is9at(t_)
+        st.write(f'is9at : {t}')
+        horof = ['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي']
+        sawa9it = [i for i in horof if i not in t]
+        st.write(f'sawa9it: {sawa9it} = {[hisab_sarir(i) for i in sawa9it]} = {sum([hisab_sarir(i) for i in sawa9it])}= {sum([maratib(hisab_sarir(i)) for i in sawa9it])}')
+        st.write(f'hisab  : {l[::-1]}')
+        st.write(f'maratib : {[maratib(i) for i in l[::-1]]}')
+        st.write(f'sum  kabir  : {s}')
+        st.write(f'sum maratib : {sum([maratib(i) for i in l[::-1]])}')
+    
+    if st.button('carré magique'):
+        def m(i,j,n):
+            # sum of rows, columns and diagonals and reverse diagonals is n(n^2+1)/2
+            a = n * ((i+j+(n-3)/2) % n) + ((i+2*j-2) % n) + 1
+            return a
+        n = 7
+        if n % 2 == 0:
+            st.write('n must be odd')
+        matrix = np.zeros((n,n))
+        for i in range(n):
+            for j in range(n):
+                matrix[i][j] = m(j + 1, i + 1, n)
+        st.write(matrix)
+        # niput Number N in order to get the sum of rows, columns and diagonals and reverse diagonals N
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     if st.button('طالع'):
         jomal = hisab_sarir(t)
         st.write(f'جمل : {jomal}')
@@ -658,6 +704,15 @@ def unify_alias(letter):
     else:
         return letter
     
+def is9at(t):
+    # delete duplicate characters
+    t = ''.join(set(t))
+    # get the number of each character
+    l = [hisab_sarir(i) for i in t]
+    # get the sum of the numbers
+    s = sum(l)
+    return t,l,s
+    
 def abjad_to_abath(text):
     text = str(text)
     d = {'أ':'أ', 'ب':'ب', 'ت':'ج', 'ث':'د', 'ج':'هـ', 'ح':'و', 'خ':'ز', 'د':'ح', 'ذ':'ط', 'ر':'ي', 'ز':'كـ', 'س':'ل', 'ش':'م', 'ص':'ن', 'ض':'س', 'ط':'ع', 'ظ':'ف', 'ع':'ص', 'غ':'ق', 'ف':'ر', 'ق':'ش', 'كـ':'ت', 'ل':'ث', 'م':'خ', 'ن':'ذ', 'هـ':'ض', 'و':'ظ', 'ي':'غ'}
@@ -688,5 +743,15 @@ def abath_to_abjad(text):
     # delete spaces from list
     converted_text = [i for i in converted_text if i != ' ']
     return converted_text, "".join(converted_text)
+
+
+def maratib(n):
+    if n<10:
+        n=n
+    if 10<=n<100:
+        n=n//10
+    if n>=100:
+        n=n//100
+    return n
 #if __name__ == '__main__':
 main()
