@@ -199,6 +199,10 @@ d_asma = {'الله': 1,
 
 l_asma = [ k for k in d_asma.keys() ]
 
+
+st.write('## اسماء الله الحسنى')
+    
+
 # delete extra'ـ' from phrase
 def delete_extra(text):
     for i in range(len(text)):
@@ -413,13 +417,9 @@ def main():
         
     st.write(l)
     
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    
 
 
-    if st.button( 'اسماء الله الحسنى') :
-        n_asma = [(hisab_sarir(k),hisab_sarir(k)-31) for k in l_asma]
-        d_as = dict(zip(l_asma,n_asma))
-        st.write(d_as)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     count,d_sawa9it = count_horof(text)

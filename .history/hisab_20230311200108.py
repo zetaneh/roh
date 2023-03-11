@@ -417,7 +417,7 @@ def main():
 
 
     if st.button( 'اسماء الله الحسنى') :
-        n_asma = [(hisab_sarir(k),hisab_sarir(k)-31) for k in l_asma]
+        n_asma = [(hisab_sarir(k),hisab_kabir) for k in l_asma]
         d_as = dict(zip(l_asma,n_asma))
         st.write(d_as)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
