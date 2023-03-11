@@ -460,7 +460,19 @@ def main():
         print(l)
         return ''.join([str(i) for i in l][::-1])
     t =  st.text_input('النص')
-    
+    st.info("""
+            1- ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَ ٱلۡحَیُّ ٱلۡقَیُّومُۚ لَا تَأۡخُذُهُۥ سِنَةࣱ وَلَا نَوۡمࣱۚ لَّهُۥ مَا فِی ٱلسَّمَـٰوَ ٰ⁠تِ وَمَا فِی ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِی یَشۡفَعُ عِندَهُۥۤ إِلَّا بِإِذۡنِهِۦۚ یَعۡلَمُ مَا بَیۡنَ أَیۡدِیهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا یُحِیطُونَ بِشَیۡءࣲ مِّنۡ عِلۡمِهِۦۤ إِلَّا بِمَا شَاۤءَۚ وَسِعَ كُرۡسِیُّهُ ٱلسَّمَـٰوَ ٰ⁠تِ وَٱلۡأَرۡضَۖ وَلَا یَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِیُّ ٱلۡعَظِیمُ﴾ [البقرة ٢٥٥]
+            
+            2- ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَ ٱلۡحَیُّ ٱلۡقَیُّومُ﴾ [آل عمران ٢]
+            
+            3 - ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَۚ لَیَجۡمَعَنَّكُمۡ إِلَىٰ یَوۡمِ ٱلۡقِیَـٰمَةِ لَا رَیۡبَ فِیهِۗ وَمَنۡ أَصۡدَقُ مِنَ ٱللَّهِ حَدِیثࣰا﴾ [النساء ٨٧]
+            
+            4- ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَۖ لَهُ ٱلۡأَسۡمَاۤءُ ٱلۡحُسۡنَىٰ﴾ [طه ٨]
+            
+            5 - ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَ رَبُّ ٱلۡعَرۡشِ ٱلۡعَظِیمِ ۩﴾ [النمل ٢٦]
+            
+            6 - ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَۚ وَعَلَى ٱللَّهِ فَلۡیَتَوَكَّلِ ٱلۡمُؤۡمِنُونَ﴾ [التغابن ١٣]
+            """)
     if st.button('مثلث الغزالي'):
         jomal = hisab_sarir(t)
         st.write(f'جمل : {jomal}')
@@ -474,9 +486,38 @@ def main():
                            [3*x,5*x,7*x+r],
                            [8*x+r,x,6*x]])
         
+        mat_mod_10 = np.zeros((3,3),dtype=int)
+        for i in range(3):
+            for j in range(3):
+                mat_mod_10[i,j] = matrix[i,j]%10
         # apply the function convert_number to each element of the matrix
         matrix = np.vectorize(convert_number)(matrix)
         st.write(matrix)
+        st.write(mat_mod_10)
+        mat_h = np.zeros((3,3),dtype=str)
+        for i in range(3):
+            for j in range(3):
+                if mat_mod_10[i,j] == 0:
+                    mat_h[i,j] = 'ا'
+                elif mat_mod_10[i,j] == 1:
+                    mat_h[i,j] = 'ا'
+                elif mat_mod_10[i,j] == 2:
+                    mat_h[i,j] = 'ب'
+                elif mat_mod_10[i,j] == 3:
+                    mat_h[i,j] = 'ج'
+                elif mat_mod_10[i,j] == 4:
+                    mat_h[i,j] = 'د'
+                elif mat_mod_10[i,j] == 5:
+                    mat_h[i,j] = 'ه'
+                elif mat_mod_10[i,j] == 6:
+                    mat_h[i,j] = 'و'
+                elif mat_mod_10[i,j] == 7:
+                    mat_h[i,j] = 'ز'
+                elif mat_mod_10[i,j] == 8:
+                    mat_h[i,j] = 'ح'
+                elif mat_mod_10[i,j] == 9:
+                    mat_h[i,j] = 'ط'
+        st.write(mat_h)
 
     if st.button('مثلث خالي الوسط'):
         jomal = hisab_sarir(t)
@@ -495,6 +536,26 @@ def main():
         # apply the function convert_number to each element of the matrix
         matrix = np.vectorize(convert_number)(matrix)
         st.write(matrix)
+        
+    if st.button('مخمس'):
+        jomal = hisab_sarir(t)
+        st.write(f'جمل : {jomal}')
+        x,r = divmod(jomal,65)
+        
+        st.write('طلسم عددي')
+        #st.write(get_num(t))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
+        st.write(abjad_to_abath(t)[1])
+        matrix = np.array([[11*x,18*x,25*x+r,2*x,9*x],
+                            [10*x+r,12*x,19*x,21*x+r,3*x],
+                            [4*x,6*x,13*x,20*x,22*x+r],
+                            [23*x+r,5*x,7*x,14*x,16*x],
+                            [17*x,24*x+r,1*x,8*x,15*x]])
+        # apply the function convert_number to each element of the matrix
+        matrix = np.vectorize(convert_number)(matrix)
+        st.write(matrix)
+                           
+        
     if st.button('مربع'):
         jomal = hisab_sarir(t)
         st.write(f'جمل : {jomal}')
@@ -571,6 +632,8 @@ def main():
         for i in range(n):
             for j in range(n):
                 matrix[i][j] = m(j + 1, i + 1, n)
+        # permutation : 270°
+        matrix = np.rot90(matrix,5)
         st.write(matrix)
         # niput Number N in order to get the sum of rows, columns and diagonals and reverse diagonals N
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
