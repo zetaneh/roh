@@ -357,7 +357,9 @@ def main():
     #st.subheader('برمجة : أيوب أبرايش')
     # subheader html center
     st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;">برمجة : أيوب أبرايش</p>', unsafe_allow_html=True)
-    text_0= """"""
+    text_0= """
+
+    """
     # center text
     # clear button
     if st.button('مسح'):
@@ -481,11 +483,11 @@ def main():
         x,r = divmod(jomal,15)
         st.write('طلسم عددي')
         #st.write(get_num(t))
-        st.write(convert_number(get_num(t)))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
         st.write(abjad_to_abath(t)[1])
         
-        matrix = np.array([[4*x,9*x+r,2*x],
-                           [3*x,5*x,7*x+r],
+        matrix = np.array([[4*x+r,9*x,2*x],
+                           [3*x,5*x+r,7*x+r],
                            [8*x+r,x,6*x]])
         
         mat_mod_10 = np.zeros((3,3),dtype=int)
@@ -570,7 +572,8 @@ def main():
         x,r = divmod(jomal,34)
         st.write('طلسم عددي')
         #st.write(get_num(t))
-        st.write(convert_number(get_num(t)))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
+        st.write(abjad_to_abath(t)[1])
 
         matrix = np.array([[8*x,11*x,14*x+r,x],
                            [13*x+r,2*x,7*x,12*x],

@@ -357,7 +357,9 @@ def main():
     #st.subheader('برمجة : أيوب أبرايش')
     # subheader html center
     st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;">برمجة : أيوب أبرايش</p>', unsafe_allow_html=True)
-    text_0= """"""
+    text_0= """
+
+    """
     # center text
     # clear button
     if st.button('مسح'):
@@ -481,7 +483,7 @@ def main():
         x,r = divmod(jomal,15)
         st.write('طلسم عددي')
         #st.write(get_num(t))
-        st.write(convert_number(get_num(t)))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
         st.write(abjad_to_abath(t)[1])
         
         matrix = np.array([[4*x,9*x+r,2*x],
@@ -554,13 +556,7 @@ def main():
                             [23*x+r,5*x,7*x,14*x,16*x],
                             [17*x,24*x+r,1*x,8*x,15*x]])
         # apply the function convert_number to each element of the matrix
-        col_sum = np.sum(matrix,axis=0)
-        row_sum = np.sum(matrix,axis=1)
-        diag_sum = np.trace(matrix)
-        diag2_sum =  np.trace(np.rot90(matrix))
-        st.write(col_sum,row_sum,diag_sum,diag2_sum)
         matrix = np.vectorize(convert_number)(matrix)
-
         st.write(matrix)
         
         
@@ -570,7 +566,8 @@ def main():
         x,r = divmod(jomal,34)
         st.write('طلسم عددي')
         #st.write(get_num(t))
-        st.write(convert_number(get_num(t)))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
+        st.write(abjad_to_abath(t)[1])
 
         matrix = np.array([[8*x,11*x,14*x+r,x],
                            [13*x+r,2*x,7*x,12*x],
@@ -643,24 +640,17 @@ def main():
         matrix = np.rot90(matrix,5)
         
         x,r = divmod(hisab_sarir(t_),n*(n**2+1)/2)
+        
         # finds in matrix index of [n**2 , n**2-1 , n**2-2 , n**2-3, ... , n**2-n+1]
-        # matrix of 0, and r where index of [n**2 , n**2-1 , n**2-2 , n**2-3, ... , n**2-n+1]
-        mat_0 = matrix.copy()
-        mat = np.vectorize(lambda x: r if x in np.arange(n**2,n**2-n,-1) else 0)(mat_0)
-        st.write(mat)
+        index = np.where(matrix == np.arange(n**2,n**2-n,-1))
+        mat_0_r = 
         st.write(f'(x,r) = ({x},{r})')
         # multiply the matrix by x; add r to last n elements conseecutivs
-        mat2 = matrix*x + mat
-        st.write(mat2)
-        sum_col = np.sum(mat2,axis=0)
-        sum_row = np.sum(mat2,axis=1)
-        sum_diag = np.trace(mat2)
-        sum_rdiag = np.trace(np.rot90(mat2))
-        st.write(f'sum_col : {sum_col}')
-        st.write(f'sum_row : {sum_row}')
-        st.write(f'sum_diag : {sum_diag}')
-        st.write(f'sum_rdiag : {sum_rdiag}')
-
+        mat = matrix*x
+        # use index : add r 
+        mat = np.vectorize(lambda x: x+r if x in np.arange(n**2,n**2-n,-1) else x)(mat)
+        st.write(mat)
+        # niput Number N in order to get the sum of rows, columns and diagonals and reverse diagonals N
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     if st.button('طالع'):
         jomal = hisab_sarir(t)

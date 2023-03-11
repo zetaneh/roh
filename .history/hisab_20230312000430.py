@@ -357,7 +357,9 @@ def main():
     #st.subheader('برمجة : أيوب أبرايش')
     # subheader html center
     st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;">برمجة : أيوب أبرايش</p>', unsafe_allow_html=True)
-    text_0= """"""
+    text_0= """
+
+    """
     # center text
     # clear button
     if st.button('مسح'):
@@ -481,7 +483,7 @@ def main():
         x,r = divmod(jomal,15)
         st.write('طلسم عددي')
         #st.write(get_num(t))
-        st.write(convert_number(get_num(t)))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
         st.write(abjad_to_abath(t)[1])
         
         matrix = np.array([[4*x,9*x+r,2*x],
@@ -554,13 +556,13 @@ def main():
                             [23*x+r,5*x,7*x,14*x,16*x],
                             [17*x,24*x+r,1*x,8*x,15*x]])
         # apply the function convert_number to each element of the matrix
+        matrix = np.vectorize(convert_number)(matrix)
         col_sum = np.sum(matrix,axis=0)
         row_sum = np.sum(matrix,axis=1)
-        diag_sum = np.trace(matrix)
-        diag2_sum =  np.trace(np.rot90(matrix))
-        st.write(col_sum,row_sum,diag_sum,diag2_sum)
-        matrix = np.vectorize(convert_number)(matrix)
-
+        diag_sum = np.sum(np.diag(matrix))
+        anti_diag_sum = np.sum(np.diag(np.fliplr(matrix)))
+        
+        st.write(col_sum,row_sum,diag_sum,anti_diag_sum)
         st.write(matrix)
         
         
@@ -570,7 +572,8 @@ def main():
         x,r = divmod(jomal,34)
         st.write('طلسم عددي')
         #st.write(get_num(t))
-        st.write(convert_number(get_num(t)))
+        st.write(convert_number(get_num(abjad_to_abath(t)[1])))
+        st.write(abjad_to_abath(t)[1])
 
         matrix = np.array([[8*x,11*x,14*x+r,x],
                            [13*x+r,2*x,7*x,12*x],

@@ -357,7 +357,9 @@ def main():
     #st.subheader('برمجة : أيوب أبرايش')
     # subheader html center
     st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;">برمجة : أيوب أبرايش</p>', unsafe_allow_html=True)
-    text_0= """"""
+    text_0= """
+
+    """
     # center text
     # clear button
     if st.button('مسح'):
