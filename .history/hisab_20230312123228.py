@@ -428,7 +428,6 @@ def main():
    
     with st.expander( 'Permutation Abajad'  ):
         N = st.number_input('N',min_value=2,value=2)
-        N = int(N)
         text_ = text
         l = []
         for i in range(1,N+1):

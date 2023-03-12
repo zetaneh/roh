@@ -426,10 +426,10 @@ def main():
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
    
-    with st.expander( 'Permutation Abajad'  ):
-        N = st.number_input('N',min_value=2,value=2)
-        N = int(N)
-        text_ = text
+    N = st.number_input('N',min_value=2,value=2)
+    text_ = text
+    with st.button('Permutation Abajad'):
+        
         l = []
         for i in range(1,N+1):
             text_permutation = abjad_to_abath(text_)[1]

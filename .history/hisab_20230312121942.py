@@ -364,21 +364,10 @@ def main():
 
     # slide 
     with st.expander( 'Quoran'):
-        import pandas as pd
         df = pd.read_csv('sura_hisab.csv')
-        num = st.number_input('السورة', min_value=1)
-        aya = st.number_input('الآية', min_value=1)
-        
-        def look_num_sura(num):
-            return df[df['sura_hisab'] == num]
-
-        def look_num_aya(num):
-            return df[df['sura_ayat'] == num]
-
-        st.dataframe(look_num_sura(num))
-        st.dataframe(look_num_aya(aya))
-        st.write( f'N<{aya}:')
-        st.dataframe(df[df['sura_ayat'] < aya])
+        num = st.slider('السورة', min_value=1, max_value=114, value=1, step=1)
+        aya
+    
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     
@@ -424,19 +413,17 @@ def main():
     st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh;">abath to abjad: <br> {abath_to_abjad(text)}', unsafe_allow_html=True) 
 
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-   
-    with st.expander( 'Permutation Abajad'  ):
-        N = st.number_input('N',min_value=2,value=2)
-        N = int(N)
-        text_ = text
-        l = []
-        for i in range(1,N+1):
-            text_permutation = abjad_to_abath(text_)[1]
-            l.append(text_permutation)
-            text_ = text_permutation
-            
-        st.write(l)
+    
+    st.write('Permutation Abajad')
+    N = st.number_input('N',min_value=2,value=2)
+    text_ = text
+    l = []
+    for i in range(1,N+1):
+        text_permutation = abjad_to_abath(text_)[1]
+        l.append(text_permutation)
+        text_ = text_permutation
+        
+    st.write(l)
     
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
@@ -607,11 +594,8 @@ def main():
         matrix = np.vectorize(convert_number)(matrix)
         st.write(matrix)
     # integer
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-
-    if st.expander('الكلمات المتعلقة بالعدد'):
-        number = st.number_input('العدد',min_value=1)
-
+    number = st.number_input('العدد',min_value=1)
+    if st.button('find'):
         # find all the words where sum with  hisab_sarir = number
         words = ['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي']
         value = [hisab_sarir(i) for i in words]

@@ -428,7 +428,6 @@ def main():
    
     with st.expander( 'Permutation Abajad'  ):
         N = st.number_input('N',min_value=2,value=2)
-        N = int(N)
         text_ = text
         l = []
         for i in range(1,N+1):
@@ -607,10 +606,8 @@ def main():
         matrix = np.vectorize(convert_number)(matrix)
         st.write(matrix)
     # integer
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-
     if st.expander('الكلمات المتعلقة بالعدد'):
-        number = st.number_input('العدد',min_value=1)
+            number = st.number_input('العدد',min_value=1)
 
         # find all the words where sum with  hisab_sarir = number
         words = ['ا','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي']

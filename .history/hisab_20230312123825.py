@@ -426,7 +426,7 @@ def main():
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
    
-    with st.expander( 'Permutation Abajad'  ):
+    with st.butt( 'Permutation Abajad'  ):
         N = st.number_input('N',min_value=2,value=2)
         N = int(N)
         text_ = text
