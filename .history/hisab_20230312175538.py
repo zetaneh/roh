@@ -503,34 +503,15 @@ def main():
             6 - ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَۚ وَعَلَى ٱللَّهِ فَلۡیَتَوَكَّلِ ٱلۡمُؤۡمِنُونَ﴾ [التغابن ١٣]
             """)
     
-    def permut(l):
-            l = list(l)
-            l = [str(c) for c in l if c != ' '][::-1]
+    if st.button('taksir'):
+        def permut(l):
             n = len(l)
             
             m = []
             for i in range(n):
-                m.append((l[i:] + l[:i])[::-1])
-            # to matrix
-            m_ = np.zeros((n,n),dtype=str)
-            for i in range(n):
-                for j in range(n):
-                    if i == 0:
-
-                        m_[i][j] = m[0][j]
-                        
-                    else:
-                        m_[i][j] = m[i][::-1][n-j-1]
-            #rotate : as in miror
-            p = np.rot90(m_,1)
-
-            return p
-                
-    if st.button('taksir'):
+                m.append((l[i:] + l[:i])[::-1]) # reverse
+            return m
         
-        
-        
-        st.write(permut(t))
         
 
     

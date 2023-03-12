@@ -522,8 +522,9 @@ def main():
                     else:
                         m_[i][j] = m[i][::-1][n-j-1]
             #rotate : as in miror
-            p = np.rot90(m_,1)
-
+            p = np.zeros((n,n),dtype=str)
+            for i in range(n):
+                    
             return p
                 
     if st.button('taksir'):

@@ -505,7 +505,7 @@ def main():
     
     def permut(l):
             l = list(l)
-            l = [str(c) for c in l if c != ' '][::-1]
+            l = [str(c) for c in l if c != ' '][]
             n = len(l)
             
             m = []
@@ -521,11 +521,7 @@ def main():
                         
                     else:
                         m_[i][j] = m[i][::-1][n-j-1]
-            #rotate : as in miror
-            p = np.rot90(m_,1)
-
-            return p
-                
+            return m_,l
     if st.button('taksir'):
         
         

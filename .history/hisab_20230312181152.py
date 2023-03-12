@@ -521,11 +521,10 @@ def main():
                         
                     else:
                         m_[i][j] = m[i][::-1][n-j-1]
-            #rotate : as in miror
-            p = np.rot90(m_,1)
-
-            return p
-                
+            #permute 90 degree
+            p = []
+            for i in range(n):
+                    
     if st.button('taksir'):
         
         
