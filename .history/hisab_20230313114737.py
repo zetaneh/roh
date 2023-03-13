@@ -662,7 +662,8 @@ def main():
                             [2*x+r,13*x,8*x,11*x],
                             [16*x,3*x+r,10*x,5*x],
                             [9*x,6*x,15*x,4*x+r]])
-        mat3_n = mat3.copy()
+        
+        
         # apply the function convert_number to each element of the matrix
         mat3 = np.vectorize(convert_number)(mat3)
         st.write("Magic square in Parshavnath temple")
@@ -670,9 +671,8 @@ def main():
         st.write('Complement: n**2+1 - n')
         n= 4
         d = n**2+1
-        st.write( d - matrix_n)
-        st.write( d - mat2_n)
-        st.write( d - mat3_n)
+        st.write( d - matrix)
+        st.write( d - mat2)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     if st.expander('الكلمات المتعلقة بالعدد'):

@@ -505,11 +505,7 @@ def main():
             ويافرد افردني بعز ورفعة   وباسمك فاخضع لي ملوكا تجبرت
             اله وجبار جليل وجامع  بجاهك اودعني معان بها انطوت
             شكور فوال القلب شكرا لنعمة  شهيد فاشهدني الحفائق اذ بدت
-            ويا ثابت الملك العظيم وثابت  باسمك اسمي في السعادة اثبتت
-            بظاء ظهور الاسم اسال ظاهرا فيا ظاهر اظهر لي الامور اذا خفت
-            خبير فخبرني مناما ويقظه  بما في اصلاحي وقصدي وماحوت
-            سالتك يا خلاق خلق مقاصدي فانت الهي خالق الخلق اجمعت
-            زكي تعالى عن صفات حوادث فسبحان ربي شانه قد تعظمت
+            ويا ثابت الملك
             """)
     
     def permut(l):
@@ -644,35 +640,10 @@ def main():
                            [13*x+r,2*x,7*x,12*x],
                            [3*x,16*x+r,9*x,6*x],
                             [10*x,5*x,4*x,15*x+r]])
-        matrix_n = matrix.copy()
         # apply the function convert_number to each element of the matrix
         matrix = np.vectorize(convert_number)(matrix)
         st.write(matrix)
-        
-        mat2 = np.array([[2*x,16*x,13*x+r,3*x],
-                         [11*x+r,5*x,8*x,10*x],
-                         [7*x,9*x+r,12*x,6*x],
-                         [14*x,4*x,1*x,15*x+r]])
-        mat2_n = mat2.copy()
-        # apply the function convert_number to each element of the matrix
-        mat2 = np.vectorize(convert_number)(mat2)
-        st.write(mat2)
-        
-        mat3 = np.array([[7*x,12*x,1*x+r,14*x],
-                            [2*x+r,13*x,8*x,11*x],
-                            [16*x,3*x+r,10*x,5*x],
-                            [9*x,6*x,15*x,4*x+r]])
-        mat3_n = mat3.copy()
-        # apply the function convert_number to each element of the matrix
-        mat3 = np.vectorize(convert_number)(mat3)
-        st.write("Magic square in Parshavnath temple")
-        st.write(mat3)
-        st.write('Complement: n**2+1 - n')
-        n= 4
-        d = n**2+1
-        st.write( d - matrix_n)
-        st.write( d - mat2_n)
-        st.write( d - mat3_n)
+    # integer
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     if st.expander('الكلمات المتعلقة بالعدد'):

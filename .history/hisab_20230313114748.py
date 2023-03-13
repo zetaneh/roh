@@ -670,9 +670,8 @@ def main():
         st.write('Complement: n**2+1 - n')
         n= 4
         d = n**2+1
-        st.write( d - matrix_n)
-        st.write( d - mat2_n)
-        st.write( d - mat3_n)
+        st.write( d - matrix)
+        st.write( d - mat2)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     if st.expander('الكلمات المتعلقة بالعدد'):

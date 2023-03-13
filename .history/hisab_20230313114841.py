@@ -672,7 +672,7 @@ def main():
         d = n**2+1
         st.write( d - matrix_n)
         st.write( d - mat2_n)
-        st.write( d - mat3_n)
+        
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     if st.expander('الكلمات المتعلقة بالعدد'):
