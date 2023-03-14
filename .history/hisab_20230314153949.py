@@ -362,14 +362,13 @@ def main():
     
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
-    with st.expander('images mojarabat'):
+    if st.expander('images mojarabat'):
         # show all images in directory, jpg and png
         import os
         images = [f for f in os.listdir('./') if f.endswith('.jpg') or f.endswith('.png')]
-        # slide gallery
         for image in images:
-            st.image(image, use_column_width=True)
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+            with st.expander(image):
+                st.image(image)
     # slide 
     with st.expander( 'Quoran'):
         import pandas as pd

@@ -369,7 +369,7 @@ def main():
         # slide gallery
         for image in images:
             st.image(image, use_column_width=True)
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+            
     # slide 
     with st.expander( 'Quoran'):
         import pandas as pd
