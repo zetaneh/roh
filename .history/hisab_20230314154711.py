@@ -485,26 +485,7 @@ def main():
 
     st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">طلسم الرزق = {tal_riz9}</p>', unsafe_allow_html=True)
     # to arabic number
-
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">طلسم الرزق = {convert_number(tal_riz9)}</p>', unsafe_allow_html=True)
-    st.info("""
-            تجمع إسمك فلان بن فلانه أو فلانه بنت فلانه بالجمل الكبير
-
-            وتضرب الجمله في عدد الطلسم وهو
-
-            666221111777
-
-
-            ثم تكتب حوله الحروف مع إسمك مفرقة دائريا كما فعلت أنا بالطلسم
-
-            وهي هذه الحروف
-
-            ز ع ع أ أ ي ق ر ر و س س ثم إسمك ف ل أ ن ب ن ف ل أ ن هـ
-
-            دائريا تقفل بها على الطلسم الجديد ناتج ضربك وتلاحظون أني أعددت الكتابه مرتين حول الطلسم لأجل أقفل عليه دائريا
-
-            """)
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    
     def get_num(t):
         l = []
         for c in t:
