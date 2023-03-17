@@ -434,7 +434,7 @@ def main():
         st.dataframe(look_num_aya(aya))
         st.write( f'N<{aya}:')
         st.dataframe(df[df['sura_ayat'] < aya])
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    st.ma;rkdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     
     text_0= """"""

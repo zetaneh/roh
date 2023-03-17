@@ -367,7 +367,9 @@ def write_notes(text,title):
             # update note
             df.loc[df['title']==title,'text'] = text
         else :
-            df = df.append({'title':title,'text':text},ignore_index=True)
+                
+        # add new note
+        df = df.append({'title':title,'text':text},ignore_index=True)
         # save
         df.to_csv('notes.csv',index=False)
         
@@ -434,7 +436,7 @@ def main():
         st.dataframe(look_num_aya(aya))
         st.write( f'N<{aya}:')
         st.dataframe(df[df['sura_ayat'] < aya])
-    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    st.ma;rkdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     
     text_0= """"""
