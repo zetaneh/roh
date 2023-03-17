@@ -2,6 +2,9 @@ import numpy as np
 import streamlit as st
 
 import pandas as pd
+# arabic reshaper
+import arabic_reshaper
+import bidi.algorithm as bidialg
 
 hide_streamlit_style = """
             <style>

@@ -2,6 +2,9 @@ import numpy as np
 import streamlit as st
 
 import pandas as pd
+# arabic reshaper
+import arabic_reshaper
+import bidi.algorithm as bidialg
 
 hide_streamlit_style = """
             <style>
@@ -448,8 +451,7 @@ def main():
       
     st.write(f'حساب جمل : {hisab_sarir(text)}')
     st.write(f'Hisab maratib: {get_maratib(text)}')
-    st.write(f'Sum Kabir+Maratib: {get_maratib(text)+hisab_sarir(text)}')
-    
+    st.write(f'Sum Kabir+Maratib: {get_maratib(text)+sum_sarir}')
     
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
    
@@ -475,7 +477,7 @@ def main():
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     count,d_sawa9it = count_horof(text)
-    sum_sarir = hisab_sarir(text)
+    sum_sarir = hisab_sarir
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
  

@@ -2,6 +2,9 @@ import numpy as np
 import streamlit as st
 
 import pandas as pd
+# arabic reshaper
+import arabic_reshaper
+import bidi.algorithm as bidialg
 
 hide_streamlit_style = """
             <style>
@@ -196,13 +199,6 @@ d_asma = {'الله': 1,
 
 l_asma = [ k for k in d_asma.keys() ]
 
-def hisab_sarir(s):
-    """Hisab sarir"""
-    sum = 0
-    for i in s:
-        sum += d_abajad[i]
-    return sum
-
 # delete extra'ـ' from phrase
 def delete_extra(text):
     for i in range(len(text)):
@@ -211,20 +207,6 @@ def delete_extra(text):
                 text = text[:i-1] + text[i:]
     return text
 
-# 
-def get_maratib(t):
-    l = []
-    for c in t:
-            n = hisab_sarir(c)
-            if n<10:
-                n=n
-            if 10<=n<100:
-                n=n//10
-            if n>=100:
-                n=n//100
-            if n!= 0:
-                l.append(n)
-    return sum(l)
 
 MOD = True
 def res(text,mod= MOD):
@@ -234,6 +216,12 @@ def res(text,mod= MOD):
         reshaped_text = arabic_reshaper.reshape(text)
         bidi_text = bidialg.get_display(reshaped_text)
         return bidi_text
+def hisab_sarir(s):
+    """Hisab sarir"""
+    sum = 0
+    for i in s:
+        sum += d_abajad[i]
+    return sum
 
 def hisab_kabir(s):
     """Hisab kabir"""
@@ -443,14 +431,7 @@ def main():
     st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh;">abjad to abath: <br> {abjad_to_abath(text)}', unsafe_allow_html=True)
     st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh;">abath to abjad: <br> {abath_to_abjad(text)}', unsafe_allow_html=True) 
 
-   
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-      
-    st.write(f'حساب جمل : {hisab_sarir(text)}')
-    st.write(f'Hisab maratib: {get_maratib(text)}')
-    st.write(f'Sum Kabir+Maratib: {get_maratib(text)+hisab_sarir(text)}')
-    
-    
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
    
     with st.expander('Permutation Abajad' ):
@@ -475,10 +456,29 @@ def main():
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     count,d_sawa9it = count_horof(text)
-    sum_sarir = hisab_sarir(text)
+    sum_sarir = 0
+    for k,v in count.items():
+        sum_sarir += v* hisab_sarir(k)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
-
- 
+    st.write(f'حساب جمل : {sum_sarir}')
+    # 
+    def get_maratib(t):
+        l = []
+        for c in t:
+                n = hisab_sarir(c)
+                if n<10:
+                    n=n
+                if 10<=n<100:
+                    n=n//10
+                if n>=100:
+                    n=n//100
+                if n!= 0:
+                    l.append(n)
+        return sum(l)
+    
+    
+        
+    st.write(f'')
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     talsam = sum_sarir * 195555521 
     st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; font-weight: bold; font-size: 20px;">طلسم المنع = {talsam}</p>', unsafe_allow_html=True)

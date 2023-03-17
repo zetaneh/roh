@@ -2,6 +2,9 @@ import numpy as np
 import streamlit as st
 
 import pandas as pd
+# arabic reshaper
+import arabic_reshaper
+import bidi.algorithm as bidialg
 
 hide_streamlit_style = """
             <style>
@@ -196,12 +199,6 @@ d_asma = {'الله': 1,
 
 l_asma = [ k for k in d_asma.keys() ]
 
-def hisab_sarir(s):
-    """Hisab sarir"""
-    sum = 0
-    for i in s:
-        sum += d_abajad[i]
-    return sum
 
 # delete extra'ـ' from phrase
 def delete_extra(text):
@@ -448,8 +445,7 @@ def main():
       
     st.write(f'حساب جمل : {hisab_sarir(text)}')
     st.write(f'Hisab maratib: {get_maratib(text)}')
-    st.write(f'Sum Kabir+Maratib: {get_maratib(text)+hisab_sarir(text)}')
-    
+    st.write(f'Sum Kabir+Maratib: {get_maratib(text)+sum_sarir}')
     
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
    
@@ -475,7 +471,9 @@ def main():
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     count,d_sawa9it = count_horof(text)
-    sum_sarir = hisab_sarir(text)
+    sum_sarir = 0
+    for k,v in count.items():
+        sum_sarir += v* hisab_sarir(k)
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
  
