@@ -357,33 +357,8 @@ def count_horof(text):
     print(f'Number of sawa9it: {len(d_sawa9it)}')
     return count,d_sawa9it
 
-def write_notes(text,title):
-    import os
-    #chek if data exist
-    if  os.path.isfile('notes.csv'):
-        # read data
-        df = pd.read_csv('notes.csv')
-        # add new note
-        df = df.append({'title':title,'text':text},ignore_index=True)
-        # save
-        df.to_csv('notes.csv',index=False)
-        
-    else:
-        # create new file
-        df = pd.DataFrame({'title':[title],'text':[text]})
-        df.to_csv('notes.csv',index=False)
-
-def read_notes():
-    import os
-    #chek if data exist
-    if  os.path.isfile('notes.csv'):
-        # read data
-        df = pd.read_csv('notes.csv')
-        return df
-    else:
-        return None
-    
-        
+def write_notes(text
+    if os
 def main():
     st.markdown('<style>body{background-color: #F0F8FF;}</style>',unsafe_allow_html=True)
     st.markdown('<p style="text-align: center; font-size: 30px; font-weight: bold;">المساعد الحرفي</p>', unsafe_allow_html=True)
@@ -395,17 +370,6 @@ def main():
     
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
-    with st.expander('Notes'):
-        title = st.text_input('Title')
-        text = st.text_area('Text')
-        if st.button('Save'):
-            write_notes(text,title)
-        df = read_notes()
-        
-        for title, text in zip(df['title'],df['text']):
-            st.markdown(f'<p style="text-align: center; font-size: 20px; font-weight: bold;">{title}</p>', unsafe_allow_html=True)
-            st.markdown(f'<p style="text-align: right; font-size: 20px; font-weight: bold;">{text}</p>', unsafe_allow_html=True)
-            st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     with st.expander('images mojarabat'):
         # show all images in directory, jpg and png
         import os
@@ -431,7 +395,7 @@ def main():
         st.dataframe(look_num_aya(aya))
         st.write( f'N<{aya}:')
         st.dataframe(df[df['sura_ayat'] < aya])
-    st.ma;rkdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
 
     
     text_0= """"""

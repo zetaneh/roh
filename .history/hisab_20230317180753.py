@@ -402,10 +402,7 @@ def main():
             write_notes(text,title)
         df = read_notes()
         
-        for title, text in zip(df['title'],df['text']):
-            st.markdown(f'<p style="text-align: center; font-size: 20px; font-weight: bold;">{title}</p>', unsafe_allow_html=True)
-            st.markdown(f'<p style="text-align: right; font-size: 20px; font-weight: bold;">{text}</p>', unsafe_allow_html=True)
-            st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+        st
     with st.expander('images mojarabat'):
         # show all images in directory, jpg and png
         import os
