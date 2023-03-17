@@ -1,7 +1,8 @@
 import numpy as np
 import streamlit as st
-
+import os
 import pandas as pd
+import base64
 
 hide_streamlit_style = """
             <style>
@@ -358,7 +359,6 @@ def count_horof(text):
     return count,d_sawa9it
 
 def write_notes(text,title):
-    import os
     #chek if data exist
     if  os.path.isfile('notes.csv'):
         # read data
@@ -377,7 +377,6 @@ def write_notes(text,title):
         df.to_csv('notes.csv',index=False)
 
 def read_notes():
-    import os
     #chek if data exist
     if  os.path.isfile('notes.csv'):
         # read data
@@ -397,7 +396,34 @@ def main():
     
     
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
+    # def read_pdf()
+    def read_pdf():
+        # find all .pdf 
+        pdf_files = [f for f in os.listdir() if f.endswith('.pdf')]
+        return pdf_files
+    
+    @st.cache
+    def displayPDF(file):
+        # Opening file from file path
+        with open(file, "rb") as f:
+            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+        pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="100%" height="600px" type="application/pdf">'
+        return pdf_display
+    
+    with st.expander('PDF files'):
+        if os.path.isfile('pdfs.csv'):
+            df_pdfs = pd.read_csv('pdfs.csv')
 
+        else : 
+            pdf = read_pdf()
+            pdf = [displayPDF(p) for p in pdf]
+            df_pdfs = pd.DataFrame({'pdf':pdf})
+            df_pdfs.to_csv('pdfs.csv',index=False)
+            
+        list_pdfs = st.selectbox('Select pdf',[f'pdf {i}' for i in range(1,len(df_pdfs)+1)])
+        st.markdown(df_pdfs['pdf'][int(list_pdfs[-1])-1],unsafe_allow_html=True)
+            
+ 
     with st.expander('Notes'):
         title = st.text_input('Title')
         text = st.text_area('Text')
@@ -411,7 +437,6 @@ def main():
             st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     with st.expander('images mojarabat'):
         # show all images in directory, jpg and png
-        import os
         images = [f for f in os.listdir('./') if f.endswith('.jpg') or f.endswith('.png')]
         # slide gallery
         for image in images:
@@ -419,7 +444,6 @@ def main():
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
     # slide 
     with st.expander( 'Quoran'):
-        import pandas as pd
         df = pd.read_csv('sura_hisab.csv')
         num = st.number_input('السورة', min_value=1)
         aya = st.number_input('الآية', min_value=1)
@@ -444,8 +468,7 @@ def main():
         text_0 = ''
     text = st.text_area('ادخل النص هنا', value=text_0, height=200)
     #suggestions
-    import pandas as pd
-    import os
+
     if os.path.exists('suggestions.csv'):
         df = pd.read_csv('suggestions.csv')
         sug = df['suggestions'].tolist()
