@@ -425,11 +425,11 @@ def main():
     if st.checkbox('اقتراحات'):
         text = st.selectbox('اختر اقتراح',sug)
 
- 
-    ## 
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Hisab Kabir = {hisab_sarir(text)}', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Hisab Maratib = {get_maratib(text)}', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Sum Kabir+Maratib = {get_maratib(text)+hisab_sarir(text)}', unsafe_allow_html=True)
+    st.write(f'حساب جمل : {hisab_sarir(text)}')
+    st.write(f'Hisab maratib: {get_maratib(text)}')
+    st.write(f'Sum Kabir+Maratib: {get_maratib(text)+hisab_sarir(text)}')
+    # align     st.markdown(f'<p style="text-align: center;
+    st
     
 
     #add url = http://holyquran.net/quran/index.html 

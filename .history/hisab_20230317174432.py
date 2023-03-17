@@ -425,12 +425,7 @@ def main():
     if st.checkbox('اقتراحات'):
         text = st.selectbox('اختر اقتراح',sug)
 
- 
-    ## 
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Hisab Kabir = {hisab_sarir(text)}', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Hisab Maratib = {get_maratib(text)}', unsafe_allow_html=True)
-    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Sum Kabir+Maratib = {get_maratib(text)+hisab_sarir(text)}', unsafe_allow_html=True)
-    
+        
 
     #add url = http://holyquran.net/quran/index.html 
     #st.markdown('<p style="text-align: center; font-size: 20px; font-weight: bold;"><a href="http://holyquran.net/quran/index.html">نسخ سور القران</a></p>', unsafe_allow_html=True)
@@ -445,7 +440,11 @@ def main():
    
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
       
- 
+    st.write(f'حساب جمل : {hisab_sarir(text)}')
+    st.write(f'Hisab maratib: {get_maratib(text)}')
+    st.write(f'Sum Kabir+Maratib: {get_maratib(text)+hisab_sarir(text)}')
+    
+    
     st.markdown(f'<hr style="border: 2px solid #000000;">', unsafe_allow_html=True)
    
     with st.expander('Permutation Abajad'):
