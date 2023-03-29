@@ -489,7 +489,9 @@ def main():
     if st.checkbox('اقتراحات'):
         text = st.selectbox('اختر اقتراح',sug)
 
- 
+    # delete duplicate 
+    hadf = set(text)
+    st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">حذف المكررة = {hadf}', unsafe_allow_html=True)
     ## 
     st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Hisab Kabir = {hisab_sarir(text)}', unsafe_allow_html=True)
     st.markdown(f'<p style="text-align: center; font-family: KFGQPC Uthman Taha Naskh; color: red;">Hisab Maratib = {get_maratib(text)}', unsafe_allow_html=True)
@@ -599,6 +601,8 @@ def main():
         return ''.join([str(i) for i in l][::-1])
     t =  st.text_input('النص')
     st.info("""
+             أَوَ مَن كَانَ مَيْتًا فَأَحْيَيْنَاهُ وَجَعَلْنَا لَهُ نُورًا يَمْشِي بِهِ فِي النَّاسِ كَمَن مَّثَلُهُ فِي الظُّلُمَاتِ لَيْسَ بِخَارِجٍ مِّنْهَا كَذَلِكَ زُيِّنَ لِلْكَافِرِينَ مَا كَانُواْ يَعْمَلُونَ 
+             
             1- ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَ ٱلۡحَیُّ ٱلۡقَیُّومُۚ لَا تَأۡخُذُهُۥ سِنَةࣱ وَلَا نَوۡمࣱۚ لَّهُۥ مَا فِی ٱلسَّمَـٰوَ ٰ⁠تِ وَمَا فِی ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِی یَشۡفَعُ عِندَهُۥۤ إِلَّا بِإِذۡنِهِۦۚ یَعۡلَمُ مَا بَیۡنَ أَیۡدِیهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا یُحِیطُونَ بِشَیۡءࣲ مِّنۡ عِلۡمِهِۦۤ إِلَّا بِمَا شَاۤءَۚ وَسِعَ كُرۡسِیُّهُ ٱلسَّمَـٰوَ ٰ⁠تِ وَٱلۡأَرۡضَۖ وَلَا یَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِیُّ ٱلۡعَظِیمُ﴾ [البقرة ٢٥٥]
             
             2- ﴿ٱللَّهُ لَاۤ إِلَـٰهَ إِلَّا هُوَ ٱلۡحَیُّ ٱلۡقَیُّومُ﴾ [آل عمران ٢]
